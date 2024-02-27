@@ -1,0 +1,16 @@
+HELP.md
+
+### IDE FILES ###
+*.swp
+*.swo
+Session.vim
+.cproject
+.idea
+*.iml
+.vscode
+.project
+.favorites.json
+.settings/
+.vs/
+
+### Project ###
