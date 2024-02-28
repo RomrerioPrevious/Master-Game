@@ -14,3 +14,4 @@ Session.vim
 .vs/
 
 ### Project ###
+resources/data/*
