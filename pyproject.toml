@@ -12,6 +12,7 @@ graphene = "^3.3"
 sqlalchemy-graphqlapi = "^0.0.1.dev5"
 redis = "^5.0.2"
 flask-socketio = "^5.3.6"
+pytest = "^8.0.2"
 
 [build-system]
 requires = ["poetry-core"]
