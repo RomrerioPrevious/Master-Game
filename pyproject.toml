@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mastergame"
-version = "alpha-0.1"
+version = "0.1.0"
 description = "Master game is a website."
 authors = ["RomrerioPrevious <ggJohn12345@yandex.ru>"]
 readme = "README.md"
@@ -8,8 +8,10 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 flask = "^3.0.2"
-sqlalchemy = "^2.0.27"
-
+graphene = "^3.3"
+sqlalchemy-graphqlapi = "^0.0.1.dev5"
+redis = "^5.0.2"
+flask-socketio = "^5.3.6"
 
 [build-system]
 requires = ["poetry-core"]
