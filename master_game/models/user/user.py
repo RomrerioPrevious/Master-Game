@@ -1,7 +1,13 @@
-from graphene import ObjectType, ID, Int, String
-from dataclasses import dataclass
+from graphene import ObjectType, ID, Int, String, List
+from master_game.models.character import CharacterSheet
 
 
-@dataclass
 class User(ObjectType):
     id = ID
+    username = String
+    email = String
+    age = Int
+    password = Int
+    avatar = String
+    status = String
+    sheets = List(CharacterSheet)

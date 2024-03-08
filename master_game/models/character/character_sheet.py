@@ -1,24 +1,24 @@
-import graphene
+from graphene import ObjectType, ID, Int, String, List
 from master_game.models.character.armor import Armor
 from master_game.models.character.stats import CharacterStats
 from master_game.models.character.weapon import Weapon
 
 
-class CharacterSheet(graphene.ObjectType):
-    id = graphene.ID
-    name: str
-    classes: [str]
-    rase: str
-    maxHits: int
-    hits: int
-    stats: CharacterStats
-    armorClass: int
-    equipment: [str]
-    weapons: [Weapon]
-    armor: Armor
-    skills: [str]
-    featuresAndTraits: [str]
-    skillBonus: int
-    inspiration: int
-    speed: int
-    magic: [str]
+class CharacterSheet(ObjectType):
+    id = ID
+    name = String
+    classes = List(String)
+    rase = String
+    maxHits = Int
+    hits = Int
+    stats = CharacterStats
+    armorClass = Int
+    equipment = List(String)
+    weapons = [Weapon]
+    armor = Armor
+    skills = List(String)
+    featuresAndTraits = List(String)
+    skillBonus = Int
+    inspiration = Int
+    speed = Int
+    magic = List(String)

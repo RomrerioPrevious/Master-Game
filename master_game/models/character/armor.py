@@ -1,7 +1,9 @@
-import graphene
-from dataclasses import dataclass
+from graphene import ObjectType, ID, Int, String, Boolean
 
 
-@dataclass
-class Armor(graphene.ObjectType):
-    ...
+class Armor(ObjectType):
+    id = ID
+    armorClass = String
+    hindranceToSecrecy = Boolean
+    strengthRequirement = Int
+    weight = Int
