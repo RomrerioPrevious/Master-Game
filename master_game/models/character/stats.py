@@ -1,11 +1,12 @@
-from graphene import ObjectType, ID, Int
+import strawberry
 
 
-class CharacterStats(ObjectType):
-    id = ID
-    strength = Int
-    dexterity = Int
-    constitution = Int
-    intelligence = Int
-    wisdom = Int
-    charisma = Int
+@strawberry.type()
+class CharacterStats:
+    id: strawberry.ID
+    strength: int
+    dexterity: int
+    constitution: int
+    intelligence: int
+    wisdom: int
+    charisma: int

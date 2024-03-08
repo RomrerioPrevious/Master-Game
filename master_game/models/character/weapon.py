@@ -1,9 +1,10 @@
-from graphene import ObjectType, ID, Int, String
+import strawberry
 
 
-class Weapon(ObjectType):
-    id = ID
-    damage = String
-    typeOfDamage = String
-    distance = Int
-    weight = Int
+@strawberry.type()
+class Weapon:
+    id: strawberry.ID
+    damage: str
+    typeOfDamage: str
+    distance: int
+    weight: int

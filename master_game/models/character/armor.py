@@ -1,9 +1,10 @@
-from graphene import ObjectType, ID, Int, String, Boolean
+import strawberry
 
 
-class Armor(ObjectType):
-    id = ID
-    armorClass = String
-    hindranceToSecrecy = Boolean
-    strengthRequirement = Int
-    weight = Int
+@strawberry.type()
+class Armor:
+    id: strawberry.ID
+    armorClass: str
+    hindranceToSecrecy: bool
+    strengthRequirement: int
+    weight: int

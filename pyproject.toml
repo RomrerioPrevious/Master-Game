@@ -11,7 +11,8 @@ flask = "^3.0.2"
 redis = "^5.0.2"
 flask-socketio = "^5.3.6"
 pytest = "^8.0.2"
-graphene = "^3.3"
+strawberry-graphql = "^0.220.0"
+strawberry-sqlalchemy-mapper = "^0.4.2"
 
 [build-system]
 requires = ["poetry-core"]
