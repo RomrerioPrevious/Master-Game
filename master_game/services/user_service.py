@@ -12,7 +12,7 @@ class UserService:
             ...
         return user
 
-    def add_or_update_user(self, id: int, user) -> None:
+    def add_or_update_user(self, id: int, user: User) -> None:
         self.cash_service.add_or_update_user(id, user)
 
     def delete_user(self, id: int) -> None:
