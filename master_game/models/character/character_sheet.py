@@ -1,15 +1,13 @@
 from master_game.models.character.armor import Armor
 from master_game.models.character.stats import CharacterStats
 from master_game.models.character.weapon import Weapon
-from typing import List
-import strawberry
+from typing import List, TypedDict
 
 
-@strawberry.type()
-class CharacterSheet:
-    id: strawberry.ID
+class CharacterSheet(TypedDict):
+    id: int
     name: str
-    classes: str
+    classes: List[str]
     rase: str
     maxHits: int
     hits: int

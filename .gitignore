@@ -15,4 +15,4 @@ Session.vim
 .pytest_cache
 
 ### Project ###
-resources/data/*
+*.db

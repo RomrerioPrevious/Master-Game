@@ -17,4 +17,3 @@ class CharacterService:
 
     def delete_character(self, id: int) -> None:
         self._cash_service.delete_user(id)
-

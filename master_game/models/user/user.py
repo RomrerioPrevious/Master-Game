@@ -1,11 +1,9 @@
 from master_game.models.character import CharacterSheet
-import strawberry
-from typing import List
+from typing import List, TypedDict
 
 
-@strawberry.type
-class User:
-    id: strawberry.ID
+class User(TypedDict):
+    id: int
     username: str
     email: str
     age: int
