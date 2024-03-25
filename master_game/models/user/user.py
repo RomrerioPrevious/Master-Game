@@ -8,6 +8,5 @@ class User(TypedDict):
     email: str
     age: int
     password: int
-    avatar: str
     status: str
     sheets: List[CharacterSheet]

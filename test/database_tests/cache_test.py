@@ -14,12 +14,11 @@ class TestCache(TestCase):
             email="a@gmail.com",
             age=22,
             password=648,
-            avatar="",
             status="Player",
-            sheets=None
+            sheets=[]
         )
-        self.cash_service.add_or_update_user(1, user)
-        new_user = self.cash_service.get_user(1)
+        self.cash_service.add_or_update(1, user)
+        new_user = self.cash_service.get(1)
         assert user is new_user
 
     def test_delete_user_when_overflow(self):
@@ -30,12 +29,11 @@ class TestCache(TestCase):
                 email="a@gmail.com",
                 age=22,
                 password=648,
-                avatar="",
                 status="Player",
-                sheets=None
+                sheets=[]
             )
-            self.cash_service.add_or_update_user(i, user)
-        assert self.cash_service.get_user(1) is None
+            self.cash_service.add_or_update(i, user)
+        assert self.cash_service.get(1) is None
 
     def test_get_user_when_overflow(self):
         for i in range(1050):
@@ -45,9 +43,8 @@ class TestCache(TestCase):
                 email="a@gmail.com",
                 age=22,
                 password=648,
-                avatar="",
                 status="Player",
-                sheets=None
+                sheets=[]
             )
-            self.cash_service.add_or_update_user(i, user)
-        assert not self.cash_service.get_user(1000) is None
+            self.cash_service.add_or_update(i, user)
+        assert not self.cash_service.get(1000) is None

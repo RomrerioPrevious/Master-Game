@@ -17,20 +17,20 @@ class UserService:
             self._session = Session()
 
     def get_user(self, id: int) -> User:
-        user = self._cash_service.get_user(id)
+        user = self._cash_service.get(id)
         if not user:
-            user = self._session.get(User, None)
+            user = self._session.get(User, None)  # TODO create database work
         return user
 
     def add_or_update_user(self, id: int, user: User) -> None:
-        self._cash_service.add_or_update_user(id, user)
+        self._cash_service.add_or_update(id, user)
         if user in self.get_user(id):
             self._session.add(user)
         else:
             self._session.query().update()
 
     def delete_user(self, id: int) -> None:
-        self._cash_service.delete_user(id)
+        self._cash_service.delete(id)
         self._session.delete(self.get_user(id))
 
     def commit(self) -> None:
