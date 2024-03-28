@@ -1,13 +1,14 @@
 from sqlalchemy.orm import sessionmaker
 from master_game.services.cache_service import CacheService
 from master_game.models import User
-from sqlalchemy import create_engine, update
+from sqlalchemy import create_engine
 
 
 class UserService:
     _cash_service = None
     _session = None
     _engine = None
+    _commit = True
 
     def __init__(self):
         if not self._engine:
@@ -22,16 +23,20 @@ class UserService:
             user = self._session.get(User, None)  # TODO create database work
         return user
 
-    def add_or_update_user(self, id: int, user: User) -> None:
+    def add_user(self, id: int, user: User) -> None:
         self._cash_service.add_or_update(id, user)
-        if user in self.get_user(id):
-            self._session.add(user)
-        else:
-            self._session.query().update()
+        self._session.add(user)
+        if self._commit:
+            self._session.commit()
+
+    def update_user(self, id: int, user: User) -> None:
+        self._cash_service.add_or_update(id, user)
 
     def delete_user(self, id: int) -> None:
         self._cash_service.delete(id)
         self._session.delete(self.get_user(id))
+        if self._commit:
+            self._session.commit()
 
     def commit(self) -> None:
         self._session.commit()

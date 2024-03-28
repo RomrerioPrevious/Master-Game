@@ -1,5 +1,5 @@
 from master_game.services.cache_service import CacheService
-from master_game.models import CharacterSheet
+from master_game.models.character import CharacterSheet
 
 
 class CharacterService:

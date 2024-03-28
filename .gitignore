@@ -16,3 +16,4 @@ Session.vim
 
 ### Project ###
 *.db
+*.log

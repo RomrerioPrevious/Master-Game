@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from ariadne import graphql_sync, snake_case_fallback_resolvers, \
     load_schema_from_path, make_executable_schema
 from ariadne.explorer import ExplorerGraphiQL
-from master_game.models import query
+from master_game.models.query import query
 
 app = Flask(__name__)
 schema = make_executable_schema(
