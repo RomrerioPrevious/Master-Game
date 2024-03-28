@@ -1,0 +1,1 @@
+import master_game.controllers.graphql_controller

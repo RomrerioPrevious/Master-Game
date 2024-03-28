@@ -1,0 +1,73 @@
+schema {
+    query: Query
+}
+
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    password: Int!
+    age: Int!
+    status: String!
+    sheets: [CharacterSheet]
+}
+
+type CharacterSheet {
+    id: ID!
+    name: String!
+    classes: [String]
+    rase: String
+    maxHits: Int
+    hits: Int
+    stats: CharacterStats
+    armorClass: Int
+    equipment: [String]
+    weapons: [Weapon]
+    armor: Armor
+    skills: [String]
+    featuresAndTraits: [String]
+    skillBonus: Int
+    inspiration: Int
+    speed: Int
+    magic: [String]
+}
+
+type CharacterStats {
+    id: ID!
+    strength: Int!
+    dexterity: Int!
+    constitution: Int!
+    intelligence: Int!
+    wisdom: Int!
+    charisma: Int!
+}
+
+type Armor {
+    id: ID!
+    armorClass: String!
+    hindranceToSecrecy: Boolean!
+    strengthRequirement: Int!
+    weight: Int!
+    counter: Int!
+}
+
+type Weapon {
+    id: ID!
+    damage: Int!
+    typeOfDamage: String!
+    distance: Int!
+    weight: Int!
+    counter: Int!
+}
+
+type Query {
+    user(id: ID!): User
+    charactersOfUser(id: ID!): [CharacterSheet]
+    character(id: ID!): CharacterSheet
+    characterStats(id: ID!): CharacterStats
+    armorOfCharacter(id: ID!): [Armor]
+    armor(id: ID!): Armor
+    weaponOfCharacter(id: ID!): [Weapon]
+    weapon(id: ID!): Weapon
+}
