@@ -1,12 +1,7 @@
 import random
-
 from flask import Flask, request, jsonify
-import sqlite3
 
 app = Flask(__name__)
-
-conn = sqlite3.connect('db/base.db')
-cursor = conn.cursor()
 
 
 @app.route('/auth', methods=['GET'])
