@@ -45,6 +45,7 @@ type CharacterStats {
 
 type Armor {
     id: ID!
+    name: String!
     armorClass: String!
     hindranceToSecrecy: Boolean!
     strengthRequirement: Int!
@@ -54,6 +55,7 @@ type Armor {
 
 type Weapon {
     id: ID!
+    name: String!
     damage: Int!
     typeOfDamage: String!
     distance: Int!
