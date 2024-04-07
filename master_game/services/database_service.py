@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
+from master_game.config import DATABASE_URL
 
 
 class DatabaseService:
@@ -9,7 +10,7 @@ class DatabaseService:
     _engine = None
     _commit = None
 
-    def __new__(cls, database_url: str,  commit=True):
+    def __new__(cls, database_url: str = "", commit=True):
         if not hasattr(cls, 'instance'):
             cls.instance = super(DatabaseService, cls).__new__(cls)
             cls.base = declarative_base()
@@ -20,5 +21,15 @@ class DatabaseService:
             cls._commit = commit
         return cls.instance
 
-    def get_session(self) -> Session:
-        return self._session
+    @staticmethod
+    def init_base() -> None:
+        sesion = DatabaseService().get_session()
+        DatabaseService.base.metadata.create_all(DatabaseService._engine)
+        sesion.commit()
+
+    @staticmethod
+    def get_session() -> Session:
+        return DatabaseService._session
+
+
+DatabaseService(DATABASE_URL)

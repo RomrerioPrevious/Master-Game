@@ -19,7 +19,7 @@ class CharacterSheet(DatabaseService.base):
     hits = Column(Integer,
                   nullable=True)
     stats = Column(Integer,
-                   ForeignKey("characters_stats.id"),
+                   ForeignKey("stats.id"),
                    nullable=True)
     armorClass = Column(Integer,
                         nullable=True)

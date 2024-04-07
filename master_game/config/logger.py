@@ -1,4 +1,5 @@
 import datetime
+from icecream import ic
 
 
 class Logger:
@@ -16,6 +17,12 @@ class Logger:
     def custom(debug: str):
         time = datetime.datetime.now().strftime("%H:%M:%S")
         return f"{time} {debug} | "
+
+    @staticmethod
+    def write_error(error: str | BaseException):
+        ic.prefix = Logger.error()
+        ic(error)
+        ic.prefix = Logger.info()
 
     @staticmethod
     def write_log(log: str):

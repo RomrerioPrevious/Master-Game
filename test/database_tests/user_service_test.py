@@ -1,4 +1,4 @@
-from master_game.services import UserService
+from master_game.services.user_service import UserService
 from master_game.models import User
 from unittest import TestCase
 import pytest
@@ -20,7 +20,7 @@ class TestUserService(TestCase):
             status="USER",
             sheets=[]
         )
-        self.user_service.add_user(1, user)
+        self.user_service.add_user(user)
 
     def test_update(self):
         user = User(
@@ -32,7 +32,7 @@ class TestUserService(TestCase):
             status="USER",
             sheets=[]
         )
-        self.user_service.update_user(1, user)
+        self.user_service.update_user(user)
 
     def test_delete(self):
         self.user_service.delete_user(1)

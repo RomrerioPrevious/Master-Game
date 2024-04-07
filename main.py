@@ -7,6 +7,7 @@ from master_game.controllers.graphql_controller import app
 
 def main() -> None:
     ic("Master-game has been started")
+    DatabaseService.init_base()
     app.run()
 
 
