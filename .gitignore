@@ -15,5 +15,5 @@ Session.vim
 .pytest_cache
 
 ### Project ###
-*.db
+resources/data/users.db
 *.log

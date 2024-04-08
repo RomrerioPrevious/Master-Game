@@ -1,24 +1,30 @@
-from master_game.models.character import CharacterSheet
-from typing import List, TypedDict
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, PickleType
+from sqlalchemy.ext.mutable import MutableList
+from master_game.services import DatabaseService
 
 
-class User(TypedDict):
-    id: int
-    username: str
-    email: str
-    age: int
-    password: int
-    status: str
-    sheets: List[CharacterSheet]
+class User(DatabaseService.base):
+    __tablename__ = "users"
 
-"""
-    id: int = Column(Integer,
-                     primary_key=True, autoincrement=True)
-    username: str = Column(String)
-    email: str = Column(String)
-    age: int = Column(Integer)
-    password: int = Column(Integer)
-    status: str = Column(String)
-    sheets: List[CharacterSheet] = Column(ARRAY,
-                                          ForeignKey("characters.id"))
-                                          """
+    id = Column(Integer,
+                primary_key=True, autoincrement=True)
+    username = Column(String)
+    email = Column(String)
+    age = Column(Integer)
+    password = Column(Integer)
+    status = Column(String)
+    sheets = Column(MutableList.as_mutable(PickleType),
+                    ForeignKey("characters.id"),
+                    nullable=True,
+                    default=[])
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "age": self.age,
+            "password": self.password,
+            "status": self.status,
+            "sheets": self.sheets
+        }

@@ -7,7 +7,6 @@ type User {
     id: ID!
     username: String!
     email: String!
-    password: Int!
     age: Int!
     status: String!
     sheets: [CharacterSheet]
@@ -45,6 +44,7 @@ type CharacterStats {
 
 type Armor {
     id: ID!
+    name: String!
     armorClass: String!
     hindranceToSecrecy: Boolean!
     strengthRequirement: Int!
@@ -54,6 +54,7 @@ type Armor {
 
 type Weapon {
     id: ID!
+    name: String!
     damage: Int!
     typeOfDamage: String!
     distance: Int!
@@ -63,11 +64,5 @@ type Weapon {
 
 type Query {
     user(id: ID!): User
-    charactersOfUser(id: ID!): [CharacterSheet]
     character(id: ID!): CharacterSheet
-    characterStats(id: ID!): CharacterStats
-    armorOfCharacter(id: ID!): [Armor]
-    armor(id: ID!): Armor
-    weaponOfCharacter(id: ID!): [Weapon]
-    weapon(id: ID!): Weapon
 }

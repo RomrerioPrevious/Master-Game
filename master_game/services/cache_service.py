@@ -11,7 +11,7 @@ class CacheService:
             return self._model[id]
         return None
 
-    def add_or_update(self, id: int, update_object: Any) -> None:
+    def add(self, id: int, update_object: Any) -> None:
         if id not in self._model.keys():
             if self._model_delete_queue.full():
                 self.delete_old()
@@ -19,7 +19,7 @@ class CacheService:
         self._model[id] = update_object
 
     def delete(self, id: int) -> None:
-        if self._model[id]:
+        if id in self._model.keys():
             del self._model[id]
 
     def delete_old(self) -> None:
