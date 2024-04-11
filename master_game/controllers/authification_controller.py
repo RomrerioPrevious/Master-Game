@@ -1,7 +1,7 @@
 import random
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 
-app = Flask(__name__)
+app = Blueprint("auth", __name__)
 
 
 @app.route('/auth', methods=['GET'])

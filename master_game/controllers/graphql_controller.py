@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 from ariadne import graphql_sync, snake_case_fallback_resolvers, \
     load_schema_from_path, make_executable_schema
 from ariadne.explorer import ExplorerGraphiQL
 from master_game.models.query import query
 
-app = Flask(__name__)
+app = Blueprint("graphql", __name__)
 schema = make_executable_schema(
     load_schema_from_path("resources/data/schemas/user.graphql"),
     query,
@@ -25,7 +25,6 @@ def graphql_server():
         schema,
         data,
         context_value=request,
-        debug=app.debug
     )
     status = 400
     if success:

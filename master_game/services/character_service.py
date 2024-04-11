@@ -1,3 +1,4 @@
+from icecream import ic
 from master_game.models import CharacterSheet
 from master_game.services import DatabaseService
 from master_game.services.cache_service import CacheService
@@ -24,18 +25,24 @@ class CharacterService:
         if not character:
             raise Exception(f"Not found character with id={id}")
         self._cash_service.add(character.id, character)
+        get = f"character with id={character.id}"
+        ic(get)
         return character
 
     def add_character(self, character: CharacterSheet) -> None:
         self._session.add(character)
         if self.commit:
             self._session.commit()
+        add = character.to_dict()
+        ic(add)
 
     def update_character(self, character: CharacterSheet) -> None:
         self._session.delete(character)
         self.add_character(character)
         if self.commit:
             self._session.commit()
+        update = character.to_dict()
+        ic(update)
 
     def delete_character(self, id: int) -> None:
         self._cash_service.delete(id)
@@ -43,4 +50,6 @@ class CharacterService:
         self._session.delete(character)
         if self.commit:
             self._session.commit()
+        delete = f"user with id={character.id}"
+        ic(delete)
 

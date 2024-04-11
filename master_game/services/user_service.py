@@ -1,3 +1,4 @@
+from icecream import ic
 from master_game.services.cache_service import CacheService
 from .database_service import DatabaseService
 from master_game.models import User
@@ -24,18 +25,24 @@ class UserService:
         if not user:
             raise Exception(f"Not found user with id={id}")
         self._cash_service.add(user.id, user)
+        get = f"user with id={user.id}"
+        ic(get)
         return user
 
     def add_user(self, user: User) -> None:
         self._session.add(user)
         if self.commit:
             self._session.commit()
+        add = user.to_dict()
+        ic(add)
 
     def update_user(self, user) -> None:
         self._session.delete(user)
         self.add_user(user)
         if self.commit:
             self._session.commit()
+        update = user.to_dict()
+        ic(update)
 
     def delete_user(self, id: int) -> None:
         self._cash_service.delete(id)
@@ -43,4 +50,6 @@ class UserService:
         self._session.delete(user)
         if self.commit:
             self._session.commit()
+        delete = f"user with id={user.id}"
+        ic(delete)
 

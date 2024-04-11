@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Blueprint
 
-app = Flask(__name__)
+app = Blueprint("first_page", __name__)
 
 
 @app.route('/', methods=['GET'])
