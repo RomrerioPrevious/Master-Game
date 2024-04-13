@@ -7,7 +7,8 @@ from master_game.controllers import graphql_controller as graphql, \
     first_page_controller as first_page, game_controller as game, \
     character_controller as character, authification_controller as auth
 
-app = Flask(__name__)
+app = Flask(__name__,
+            template_folder="resources/pages")
 app.config["SECRET_KEY"] = "RSQ_ET-eHvsI5u0Z-mwFk-MVRwADSb"
 
 blueprints = [
