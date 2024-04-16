@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, request
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
+
+from master_game.models.room import Room
 from master_game.services.room_service import RoomService
 from master_game.services.character_service import CharacterService
 from master_game.services.user_service import UserService
@@ -43,6 +45,22 @@ def join(data):
     return render_template("/game.html")
 
 
+@socetio.on("add_character", namespace="/game")
+def add_character(data):
+    room_id = data["room"]
+    x, y = data["coordinates"]
+    character_id = data["character"]
+    user_id = data["user"]
+    room = room_service.get_room(room_id)
+    character = None
+    if verify_character(user_id, character_id, room):
+        character = room["characters"][character_id]
+        character["coordinates"] = (x, y)
+        room["characters"][character_id] = character
+    msg = character
+    ic(room_id, msg)
+
+
 @socetio.on("push_character", namespace="/game")
 def push(data):
     room_id = data["room"]
@@ -51,10 +69,8 @@ def push(data):
     user_id = data["user"]
     room = room_service.get_room(room_id)
     character = room["characters"][character_id]
-    if user_id in room["users"].keys():
-        sheets = user_service.get_user(user_id).sheets
-        if character_id in list(map(lambda sheet: sheet.id, sheets)):
-            character["coordinates"] = (x, y)
+    if verify_character(user_id, character_id, room):
+        character["coordinates"] = (x, y)
     msg = character
     ic(room_id, msg)
     emit("push", {**msg}, room=room_id)
@@ -63,8 +79,17 @@ def push(data):
 @socetio.on("damage", namespace="/game")
 def damage(data):
     room_id = data["room"]
-    character = data["character"]
-    user_id = data["user"]
+    character_id = data["character"]
+    user_damage_id = data["user"]
+    damage = data["damage"]
+    room = room_service.get_room(room_id)
+    if user_damage_id in room["users"].keys():
+        character = character_service.get_character(character_id)
+        if character.hits - damage <= 0:
+            character.hits = 0
+        else:
+            character.hits -= damage
+        character_service.update_character(character)
 
 
 @socetio.on("leave", namespace="/game")
@@ -79,3 +104,11 @@ def leave(data):
         ic(leave)
     leave = f"User {user_id} leave from room {room_id}"
     ic(leave)
+
+
+def verify_character(user_id: int, character_id: int, room: Room) -> bool:
+    if user_id in room["users"].keys():
+        sheets = user_service.get_user(user_id).sheets
+        if character_id in list(map(lambda sheet: sheet.id, sheets)):
+            return True
+    return False
