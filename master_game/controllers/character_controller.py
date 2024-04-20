@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from master_game.services.character_service import CharacterService
 from master_game.services.user_service import UserService
 from master_game.models.character.character_sheet import CharacterSheet
@@ -12,6 +12,7 @@ def create_character():
     user = UserService().get_user(user_id)
     character = CharacterSheet()
     CharacterService().add_character(character)
+    user["sheets"].append(character)
     UserService().update_user(user)
 
 
@@ -20,7 +21,7 @@ def update_character(char_id):
     user_id = int(request.cookies.get("user_id"))
     user = UserService().get_user(user_id)
     character = CharacterService().get_character(char_id)
-    if user["status"] == "admin":
+    if user["status"] == "admin" or character in user["sheets"]:
         character.update_character(char_id)
 
 
@@ -28,7 +29,8 @@ def update_character(char_id):
 def delete_character(char_id):
     user_id = int(request.cookies.get("user_id"))
     user = UserService().get_user(user_id)
-    if user["status"] == "admin":
+    character = CharacterService().get_character(char_id)
+    if user["status"] == "admin" or character in user["sheets"]:
         CharacterService().delete_character(char_id)
 
 
@@ -38,7 +40,8 @@ def get_character(char_id):
     try:
         user = UserService().get_user(user_id)
         character = CharacterService().get_character(char_id)
+        if character not in user["sheets"]:
+            raise Exception(f"Not found character with id={char_id}")
     except Exception:
         return
-    else:
-        return character
+    return character
