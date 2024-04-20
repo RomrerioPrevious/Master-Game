@@ -54,7 +54,7 @@ class CharacterService:
         ic(delete)
 
     def get_characters_weapon_id(self, weapon: Weapon) -> int:
-        charactersWeapon = self._session.query(weapon).to_dict()
+        charactersWeapon = weapon.to_dict()
         name, typeOfDamage = charactersWeapon["name"], charactersWeapon["typeOfDamage"]
         damage, distance, weight = charactersWeapon["damage"], charactersWeapon["distance"], charactersWeapon["weight"]
         hashedName = CharacterService.hashing_string(name)
@@ -63,7 +63,7 @@ class CharacterService:
         return hashedId  # [0;2_147_483_647]
 
     def get_characters_armor_id(self, armor: Armor) -> int:
-        charactersWeapon = self._session.query(armor).to_dict()
+        charactersWeapon = armor.to_dict()
         name, armorClass = charactersWeapon["name"], charactersWeapon["armorClass"]
         hindranceToSecrecy = int(charactersWeapon["hindranceToSecrecy"])
         strengthRequirement, weight = charactersWeapon["strengthRequirement"], charactersWeapon["weight"]
