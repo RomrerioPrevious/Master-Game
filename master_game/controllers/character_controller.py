@@ -32,6 +32,8 @@ def delete_character(char_id):
     character = CharacterService().get_character(char_id)
     if user["status"] == "admin" or character in user["sheets"]:
         CharacterService().delete_character(char_id)
+        user["sheets"].remove(character)
+    UserService().update_user(user)
 
 
 @app.route('/pers/<int:char_id>', methods=['GET'])
