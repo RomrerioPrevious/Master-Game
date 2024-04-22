@@ -1,0 +1,25 @@
+.cell {
+}
+
+.chip {
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.field {
+
+}
+
+.panel {
+
+}
+
+.damage-button {
+    width: 125px;
+}
+
+.movement-button {
+    width: 125px;
+}

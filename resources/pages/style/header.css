@@ -1,0 +1,48 @@
+@font-face {
+	font-family: "Eugusto Regular"; 
+	src: url(https://fonts-online.ru/fonts/eugusto-free-personal-use); 
+    font-size: 25px;
+}
+
+.header {
+    background-color: rgb(17, 2, 51);
+    margin: 0;
+    padding: 0;
+}
+
+.singin {
+    background-color: transparent;
+    border-width: 3px;
+    border-color: orange;
+}
+
+.singin:focus {
+}
+
+.singin-text {
+    font-family: "Eugusto Regular";
+    color: white;
+}
+
+
+.login {
+    background-color: transparent;
+    border-width: 3px;
+    border-color: orange;
+}
+
+.login:focus {
+}
+
+.login-text {
+    font-family: "Eugusto Regular";
+    color: white;
+}
+
+.logo {
+    width: 50px;
+}
+
+.avatar {
+    border-radius: 20%;
+}

@@ -8,7 +8,7 @@ class CharacterService:
     _database_service = None
     _cash_service = None
     _session = None
-    commit = True  # коммитит в общую базу данных
+    commit = True
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
