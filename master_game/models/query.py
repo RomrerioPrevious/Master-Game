@@ -12,7 +12,7 @@ character_service = CharacterService()
 @query.field("user")
 def user(self, info: GraphQLResolveInfo, id: int) -> dict:
     try:
-        return user_service.get_user(id)
+        return user_service.get_user_by_id(id)
     except Exception as ex:
         Logger.write_error(ex)
 

@@ -8,7 +8,7 @@ class TestUserService(TestCase):
     user_service = UserService()
 
     def test_get(self):
-        user = self.user_service.get_user(1)
+        user = self.user_service.get_user_by_id(1)
 
     def test_add(self):
         user = User(

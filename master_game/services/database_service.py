@@ -11,7 +11,7 @@ class DatabaseService:
     _commit = None
 
     def __new__(cls, database_url: str = "", commit=True):
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(DatabaseService, cls).__new__(cls)
             cls.base = declarative_base()
             cls._engine = create_engine(database_url, echo=True)

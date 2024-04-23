@@ -11,7 +11,7 @@ class CharacterService:
     commit = True  # коммитит в общую базу данных
 
     def __new__(cls):
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(CharacterService, cls).__new__(cls)
             cls._database_service = DatabaseService()
             cls._session = cls._database_service.get_session()
@@ -76,7 +76,7 @@ class CharacterService:
     @staticmethod
     def hashing_string(string, thresholdCoeff=1) -> int:
         hashed = 2_147_483_647
-        billet = ''
+        billet = ""
         symbolsCodes = [code for code in map(ord, string)]
         for c in symbolsCodes:
             billet += str(c)
