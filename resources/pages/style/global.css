@@ -1,0 +1,11 @@
+body {
+    background-image: url("/resources/pages/img/background.png");
+    background-size: 100%;
+}
+
+.block {
+    background-color: black;
+    opacity: 50%;
+    width: 80%;
+    height: 100%;
+}
