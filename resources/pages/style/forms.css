@@ -1,0 +1,22 @@
+.reg {
+    border: 1px solid orange;
+}
+
+.field {
+    border: 1px solid orange;
+}
+
+.field-text {
+    font-family: "Eugusto Regular";
+    color: white;
+}
+
+.entry {
+    background-color: transparent;
+    border-width: 3px;
+    border-color: orange;
+}
+
+.center {
+    text-align: center;
+}
