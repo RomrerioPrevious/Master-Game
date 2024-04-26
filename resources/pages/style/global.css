@@ -4,8 +4,7 @@ body {
 }
 
 .block {
-    background-color: black;
-    opacity: 50%;
+    background-image: url("/resources/pages/img/separator.png");
     width: 80%;
     height: 100%;
 }

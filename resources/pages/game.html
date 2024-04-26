@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Game</title>
+        <title>Master-Game</title>
         <link 
           rel="stylesheet" type="text/css" 
           href="style/game.css" />
@@ -47,29 +47,34 @@
         </nav>
         <div class="container block">
             <div class="field">
-                <table>
-                    <tbody>
-                        <td>
-                            <tr>
-                                
-                            </tr>
-                        </td>
-                    </tbody>
-                </table>
+                <div class="cell">
+                    <div class="chip">
+                    </div>
+                </div>
             </div>
             <div class="panel">
-                <button class="movement-button">
-                    <h6>
-                        Move
-                    </h6>
-                </button>
-                <button class="damage-button">
-                    <h6>
-                        Damage
-                    </h>
-                </button>
+                <div class="container">
+                    <button class="movement-button">
+                        <h6>
+                            Move
+                        </h6>
+                    </button>
+                    <button class="damage-button">
+                        <h6>
+                            Damage
+                        </h>
+                    </button>
+                </div>
+                
             </div>
         </div>
+    </body>
+    <script
+          type="text/javascript"
+          src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script
+          type="text/javascript"
+          src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script 
           type="text/javascript" 
           src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" 
@@ -86,5 +91,10 @@
           integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
           crossorigin="anonymous"
         ></script>
-    </body>
+        <script
+        type="text/javascript"
+        src="js/game.js"></script>
+        <script
+        type="text/javascript"
+        src="js/sockets.js"></script>
 </html>
