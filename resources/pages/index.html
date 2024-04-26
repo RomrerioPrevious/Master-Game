@@ -14,12 +14,16 @@
             rel="stylesheet"
             href="style/header.css"
     />
+    <link
+            rel="stylesheet"
+            href="style/forms.css"
+    />
 </head>
 <body>
 <nav class="navbar header">
     <div class="container">
         <a href="/" class="logo">
-            <img src="img/logo.png" width="40"><img>
+            <img src="img/logo.png" width="40">
         </a>
         {% if user == None %}
         <div>
@@ -36,14 +40,14 @@
         </div>
         {% else %}
         <div>
-            <a class="avatar" href=>
-                <img class="avatar" src="img/user.jpg" width="40"><img>
+            <a class="avatar" href="">
+                <img class="avatar" src="img/user.jpg" width="40">
             </a>
         </div>
         {% endif %}
     </div>
 </nav>
-<div class="container block">
+<div class="container block center"> <!-- Добавлен класс center для блока -->
 </div>
 </body>
 </html>
