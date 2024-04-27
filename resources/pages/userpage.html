@@ -52,22 +52,29 @@
     </div>
 </nav>
 <div class="container block center">
-  <div class="container">
-    <div class="form-container">
-    	<img src="img/user.jpg" alt="User Icon" class="icon" width = "40">
+  <div class="section-container">
+    <div class="left-side">
+	<img src="img/user.jpg" alt="User Icon" class="icon" width = "100">
+    </div>
+    <div class="right-side">
+    	<div class="form-container">
         <form id="dataForm" action="/submit" method="POST">
-            <input type="text" name="Name" class="form-field" disabled>
-            <input type="text" name="email" class="form-field" disabled>
-            <input type="text" name="age" class="form-field" disabled>
-            <input type="checkbox" id="toggleSwitch"> Enable Fields
+            <div class="login-page-usernameedit"
+              ><input type="text" placeholder="nickname" name="name" class="form-field" disabled></div
+            ><div class="login-page-emailedit"
+              ><input type="text" placeholder="email" name="email" class="form-field" disabled></div
+            ><div class="login-page-ageedit"
+              ><input type="text" placeholder="age" name="age" class="form-field" disabled></div
+            ><input type="checkbox" id="toggleSwitch"> edit
         </form>
+    	</div>
     </div>
 </div>
 
 <div class="buttons">
-    <button id="joinButton" class="button">Join</button>
-    <button id="createButton" class="button">Create</button>
-    <button id="additionalButton" class="button">Additional Functions</button>
+    <button id="joinButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Join</button>
+    <button id="createButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Create</button>
+    <button id="additionalButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Additional Functions</button>
 </div>
 
 <script>
@@ -85,21 +92,18 @@
                 body: formData
             })
             .then(response => {
-                // Handle response from server if needed
             })
             .catch(error => {
-                // Handle error if POST request fails
             });
         }
     });
 </script>
 <div class="carousel">
-    <div class="button">Button 1</div>
-    <div class="button">Button 2</div>
-    <div class="button">Button 3</div>
-    <div class="button">Button 4</div>
-    <div class="button">Button 5</div>
-    <div class="button">Button 6</div>
+    <button class="button">Character</button>
+    <button class="button">Character1</button>
+    <button class="button">Character2</button>
+    <button class="button">Character3</button>
+    <button class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">+</button>
 </div>
 
 <script>
