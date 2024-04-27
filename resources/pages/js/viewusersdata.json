@@ -1,0 +1,26 @@
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+const app = express();
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/upload', upload.single('image'), function (req, res, next) {
+    const userId = req.body.userId; // Assuming you're sending the user ID in the request body
+    const oldPath = req.file.path;
+    const newPath = path.join(__dirname, 'resources/data/img', userId + path.extname(req.file.originalname));
+
+    fs.rename(oldPath, newPath, err => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error while renaming file');
+        } else {
+            res.send('File uploaded and moved successfully');
+        }
+    });
+});
+
+app.listen(3000, function () {
+    console.log('App listening on port 3000!');
+});
