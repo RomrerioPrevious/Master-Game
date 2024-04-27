@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
         <title>Master-Game: auth</title>
         <link
@@ -9,26 +8,26 @@
         />
         <link
                 rel="stylesheet"
-                href="{{ url_for('static', filename='style/global.css') }}"
+                href="style/global.css"
         />
         <link
                 rel="stylesheet"
-                href="{{ url_for('static', filename='style/header.css') }}"
+                href="style/header.css"
         />
         <link
                 rel="stylesheet"
-                href="{{ url_for('static', filename='style/forms.css') }}"
+                href="style/forms.css"
         />
         <link
                 rel="stylesheet"
-                href="{{ url_for('static', filename='style/userpage.css') }}"
+                href="style/userpage.css"
         />
     </head>
     <body>
-    <nav class="navbar header">
+        <nav class="navbar header">
             <div class="container">
                 <a href="/" class="logo">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" width="40"><img>
+                    <img src="img/logo.png" width="40">
                 </a>
                 {% if user == None %}
                 <div>
@@ -45,55 +44,110 @@
                 </div>
                 {% else %}
                 <div>
-                    <a class="avatar" href=>
-                        <img class="avatar" src="{{ url_for('static', filename='img/user.jpg') }}" width="40"><img>
+                    <a class="avatar" href="">
+                        <img class="avatar" src="img/user.jpg" width="40">
                     </a>
                 </div>
                 {% endif %}
             </div>
         </nav>
         <div class="container block center">
-            <form id="main-form" action="/submit" method="POST">
-                <div class="edit">
-                    <input type="text" placeholder="nickname" name="name" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="class & lvl" name="classAndLevel" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="предыстория" name="history" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="имя игрока" name="playerName" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="species" name="species" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="speed" name="speed" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="worldviews" name="worldviews" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="experience" name="experience" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="strenght" name="strenght" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="dexterity" name="dexterity" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="body type" name="body type" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="intelligence" name="intelligence" class="form-field">
-                </div>
-                <div class="edit">
-                    <input type="text" placeholder="charisma" name="charisma" class="form-field">
-                </div>
-                <input type="submit" value="Send">
-            </form>
+		<form id="main-form" action="/submit" method="POST">
+			<div class="edit">
+				<input type="text" placeholder="nickname" name="name" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="class & lvl" name="classAndLevel" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="предыстория" name="history" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="имя игрока" name="playerName" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="species" name="species" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="speed" name="speed" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="worldviews" name="worldviews" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="experience" name="experience" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="strenght" name="strenght" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="dexterity" name="dexterity" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="body type" name="body type" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="intelligence" name="intelligence" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="charisma" name="charisma" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="armorClass" name="armorClass" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="masterBonus" name="masterBonus" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="totalHits" name="totalHits" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="diceHits" name="diceHits" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="weaponName" name="weaponName" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="distance" name="distance" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="attackBonus" name="attackBonus" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="damage" name="damage" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="typeOfDamage" name="typeOfDamage" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="weight" name="weight" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="armor" name="armor" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="classOfArmor" name="classOfArmor" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="armorWeight" name="armorWeight" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="sheild" name="sheild" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="additionalItems" name="additionalItems" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="additionalItems" name="additionalItems" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="equipment" name="equipment" class="form-field">
+			</div>
+			<div class="edit">
+				<input type="text" placeholder="traitsAndSkills" name="traitsAndSkills" class="form-field">
+			</div>
+			<input type="submit" value="Send">
+		</form>
             </div>
+     </script>
 </html>
