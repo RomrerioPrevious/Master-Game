@@ -1,0 +1,32 @@
+.carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+	left: 20.00%;
+	top: 45.00%;
+        width: 60%;
+        border: 3px solid orange;
+        border-radius: 10px
+        white-space: nowrap;
+    }
+.button {
+        flex: 0 0 calc(33.33% - 10px);
+        margin: 5px;
+        padding: 10px;
+	font-family: "Eugusto Regular";
+        border: 1px solid orange;
+        border-radius: 3px;
+        text-align: center;
+	color: white;
+        background-color: rgba(250, 187, 83, 0.9);
+    }
+.section-container {
+	display: flex;
+}
+.left-side {
+	width: 50%;
+}
+.right-side {
+	width: 50%;
+}
