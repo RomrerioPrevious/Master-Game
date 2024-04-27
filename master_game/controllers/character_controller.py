@@ -72,7 +72,6 @@ def update_character(char_id):
 @app.route("/pers/<int:char_id>", methods=["DELETE"])
 def delete_character(char_id):
     user_id = int(request.cookies.get("user_id"))
-    user = UserService().get_user(user_id)
     character = CharacterService().get_character(char_id)
     user = UserService().get_user_by_id(user_id)
     character = character_service.get_character(char_id)
