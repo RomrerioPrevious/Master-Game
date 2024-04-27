@@ -18,7 +18,7 @@ def get_character(char_id):
         character = character_service.get_character(char_id)
         if character not in user["sheets"]:
             raise Exception(f"Not found character with id={char_id}")
-        return render_template("charpage.html")
+        return render_template("charpage.html", user=user_id)
     except Exception as ex:
         Logger.write_error(ex)
 

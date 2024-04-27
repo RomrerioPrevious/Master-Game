@@ -20,7 +20,8 @@ user_service = UserService()
 
 @app.route("/game/<int:room_id>", methods=["GET"])
 def get_game(room_id: int):
-    return render_template("/game.html", room_id=room_id)
+    user_id = request.cookies.get("user_id")
+    return render_template("/game.html", room_id=room_id, user=user_id)
 
 
 @app.route("/game", methods=["POST"])
@@ -49,16 +50,16 @@ def join(data):
 @socetio.on("add_character")
 def add_character(data):
     room_id = data["room"]
-    x, y = data["coordinates"]
+    coord = data["coordinates"]
     character_id = data["character"]
     user_id = data["user"]
     room = room_service.get_room(room_id)
     character = None
     if verify_character(user_id, character_id, room):
         character = room["characters"][character_id]
-        character["coordinates"] = (x, y)
+        character["coordinates"] = coord
         room["characters"][character_id] = character
-        send(data)
+        emit("add_character", data)
     msg = character
     ic(room_id, msg)
 
@@ -71,7 +72,7 @@ def push(data):
     room = room_service.get_room(room_id)
     character = room["characters"][character]
     character["coordinates"] = coord
-    send(data)
+    emit("push_character", data)
     msg = character
     ic(room_id, msg)
 

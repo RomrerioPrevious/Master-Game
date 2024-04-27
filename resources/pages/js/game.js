@@ -22,35 +22,45 @@ function createField() {
 
 socket.on("join", (data) => {
     if (data != undefined) {
+        console.log(data);
         for (char_name in data) {
-            coord = data[char_name]["coord"];
+            coord = data[char_name]["coordinates"];
             console.log(coord);
             char_name = makeRequest("{character(id: $char) {name}}"
-                    .replace("$char", char_name));
-            showChip(coord, char_name[0]);
+                    .replace("$char", 0));
+            const getName = async () => {
+                new_name = await char_name
+                showChip(coord, new_name["data"]["character"]["name"]);
+            }
+            getName();
         }
     }
 });
 
 socket.on("add_character", (socket) => {
-    coords = element["coords"];
-    char = element["character"];
-    char_name = makeRequest("{character(id: $char) {name}}"
-        .replace("$char", char));
-    showChip(coord, char_name[0]);
+    if (data != undefined) {
+        for (char_name in data) {
+            coord = data[char_name]["coordinates"];
+            console.log(coord);
+            const getName = async () => {
+                new_name = await char_name
+                console.log(new_name)
+                showChip(coord, new_name["data"]["character"]["name"]);
+            }
+            getName();
+        }
+    }
 });
 
 socket.on("push_character", (socket) => {
-    newCoord = element["new-coords"];
-    oldCoord = element["old-coords"];
-    char_name = makeRequest("{character(id: $char) {name}}"
-        .replace("$char", char));
-    deleteChip(oldCoord)
-    showChip(newCoord, char);
+    console.log(socket)
+    newCoord = socket["coordinates"];
+    oldCoord = socket["old-coords"];
+    moveChipNoEmit(oldCoord, newCoord, socket["name"]);
 });
 
 socket.on("leave", (socket) => {
-    coord = element["coords"];
+    coord = socket["coords"];
     deleteChip(coord);
 });
 
@@ -75,7 +85,15 @@ function moveChip(startCoord, newCoord) {
     showChip(newCoord, chip);
     deleteChip(startCoord);
     setDroppable();
-    socket.emit("push_character", {"room": 1, "coordinates": newCoord, "character": chip, "old_coords": oldCoord})
+    socket.emit("push_character", {"room": 1, "coordinates": newCoord, "character": chip, "old_coords": startCoord, "name": chip})
+}
+
+function moveChipNoEmit(startCoord, newCoord, chip_name) {
+    console.log("move from " + startCoord + " to " + newCoord);
+    chip = map[startCoord];
+    showChip(newCoord, chip_name);
+    deleteChip(startCoord);
+    setDroppable();
 }
 
 function showChip(coord, name) {
