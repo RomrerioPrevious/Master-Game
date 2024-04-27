@@ -1,4 +1,4 @@
-const url  = "http://localhost:5500/graphql";
+const url  = "http://localhost:5000/graphql";
 
 const makeRequest = (query) => {
     return fetch(url, {

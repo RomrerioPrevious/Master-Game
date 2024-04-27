@@ -31,7 +31,19 @@ class CharacterService:
         return character
 
     def add_character(self, character: CharacterSheet) -> None:
+        armor = character.armor
+        character.armor = armor.id
+        stats = character.stats
+        character.stats = stats.id
+        weapons = character.weapons
+        weapons_ids = []
+        for i in weapons:
+            weapons_ids.append(i.id)
+            self._session.add(i)
+        character.weapons = weapons_ids
         self._session.add(character)
+        self._session.add(armor)
+        self._session.add(stats)
         if self.commit:
             self._session.commit()
         add = character.to_dict()

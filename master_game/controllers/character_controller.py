@@ -2,7 +2,7 @@ from master_game.models.character.character_sheet import CharacterSheet
 from master_game.services.character_service import CharacterService
 from master_game.services.user_service import UserService
 from master_game.config import Logger
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template
 
 app = Blueprint("character", __name__)
 
@@ -18,7 +18,7 @@ def get_character(char_id):
         character = character_service.get_character(char_id)
         if character not in user["sheets"]:
             raise Exception(f"Not found character with id={char_id}")
-        return character
+        return render_template("charpage.html")
     except Exception as ex:
         Logger.write_error(ex)
 

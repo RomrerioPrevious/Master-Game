@@ -30,7 +30,6 @@ def main() -> None:
     DatabaseService.init_base()
     socetio = game.socetio
     socetio.init_app(app)
-    """
     service = CharacterService()
     character = CharacterSheet(
         id=0,
@@ -76,7 +75,6 @@ def main() -> None:
         magic=["d"],
     )
     service.add_character(character)
-    """
     socetio.run(app, allow_unsafe_werkzeug=True)
 
 

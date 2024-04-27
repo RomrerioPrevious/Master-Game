@@ -12,8 +12,15 @@ app = Blueprint("game", __name__)
 
 socetio = SocketIO()
 room_service = RoomService()
+room_service.create_room(1, 1)
+room_service.get_room(1)["characters"] = {"F": {"coord": 1}}
 character_service = CharacterService()
 user_service = UserService()
+
+
+@app.route("/game/<int:room_id>", methods=["GET"])
+def get_game(room_id: int):
+    return render_template("/game.html", room_id=room_id)
 
 
 @app.route("/game", methods=["POST"])
@@ -23,29 +30,23 @@ def create_room():
     while room_id not in room_service.get_active_ids():
         room_id = randint(0, 2_000_000_000)
     room_service.create_room(room_id, user_id)
-    return redirect(f"/game")
+    return redirect(f"/game/{room_id}")
 
 
-@app.route("/game", methods=["GET"])
-def game():
-    return render_template("/game.html")
-
-
-@socetio.on("join", namespace="/game")
+@socetio.on("join")
 def join(data):
     room_id = data["room_id"]
     if room_id not in room_service.get_active_ids():
         return redirect("/game")
     room = room_service.get_room(room_id)
-    room["users"][data["user_id"]](
-        {"status": "player"}
-    )
+    room["users"][data["user_id"]] = {"status": "player"}
     join_room(room_id)
+    msg = room_service.get_room(room_id)["characters"]
+    emit("join", msg)
     ic(room_id, data["user_id"])
-    return render_template("/game.html")
 
 
-@socetio.on("add_character", namespace="/game")
+@socetio.on("add_character")
 def add_character(data):
     room_id = data["room"]
     x, y = data["coordinates"]
@@ -57,26 +58,25 @@ def add_character(data):
         character = room["characters"][character_id]
         character["coordinates"] = (x, y)
         room["characters"][character_id] = character
+        send(data)
     msg = character
     ic(room_id, msg)
 
 
-@socetio.on("push_character", namespace="/game")
+@socetio.on("push_character")
 def push(data):
     room_id = data["room"]
-    x, y = data["coordinates"]
-    character_id = data["character"]
-    user_id = data["user"]
+    coord = data["coordinates"]
+    character = data["character"]
     room = room_service.get_room(room_id)
-    character = room["characters"][character_id]
-    if verify_character(user_id, character_id, room):
-        character["coordinates"] = (x, y)
+    character = room["characters"][character]
+    character["coordinates"] = coord
+    send(data)
     msg = character
     ic(room_id, msg)
-    emit("push", {**msg}, room=room_id)
 
 
-@socetio.on("damage", namespace="/game")
+@socetio.on("damage")
 def damage(data):
     room_id = data["room"]
     character_id = data["character"]
@@ -92,7 +92,7 @@ def damage(data):
         character_service.update_character(character)
 
 
-@socetio.on("leave", namespace="/game")
+@socetio.on("leave")
 def leave(data):
     room_id = data["room"]
     user_id = data["user"]
@@ -102,6 +102,7 @@ def leave(data):
         room_service.close_room(room_id)
         leave = f"Room {room_id} closed"
         ic(leave)
+    send(data)
     leave = f"User {user_id} leave from room {room_id}"
     ic(leave)
 

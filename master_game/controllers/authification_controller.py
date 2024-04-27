@@ -56,6 +56,7 @@ def register_user():
 @app.route("/user/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     service.get_user_by_id(user_id)
+    return render_template("userpage.html")
 
 
 @app.route("/user", methods=["POST"])
