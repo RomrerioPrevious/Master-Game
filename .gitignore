@@ -12,6 +12,8 @@ Session.vim
 .favorites.json
 .settings/
 .vs/
+.pytest_cache
 
 ### Project ###
-resources/data/*
+resources/data/users.db
+*.log
