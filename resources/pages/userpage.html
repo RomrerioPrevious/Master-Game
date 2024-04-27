@@ -54,7 +54,14 @@
         <div class="container block center">
             <div class="section-container">
                 <div class="left-side">
-                    <img src="img/user.jpg" alt="User Icon" class="icon" width = "100">
+		<form id="dataForm" action="/submit" method="POST">
+    		    <div class="choose-image">
+        		<img src="img/user.jpg" alt="User Icon" class="icon" width = "100" id="iconImage" onclick="changeImage()" style="pointer-events: none;">
+    		    </div>
+    		    <div class="choose-image">
+			<input type="file" class="form-field" name="file" disabled>
+    		    </div>
+		</form>
                 </div>
                 <div class="right-side">
                     <div class="form-container">
@@ -105,8 +112,30 @@
                 })
                 .catch(error => {
                 });
+            }else{
+		var image = document.getElementById('iconImage');
+                image.src = 'img/avatar.png';
             }
         });
+    </script>
+    <script>
+        function uploadImage() {
+            const imageInput = document.getElementById('iconImage');
+            const file = imageInput.files[0];
+            const userId = '123154212';
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('userId', userId);
+
+            fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        }
     </script>
     <script>
         const carousel = document.querySelector('.carousel');
