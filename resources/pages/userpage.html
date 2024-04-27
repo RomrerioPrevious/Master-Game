@@ -8,26 +8,26 @@
         />
         <link
                 rel="stylesheet"
-                href="style/global.css"
+                href="{{ url_for('static', filename='style/global.css') }}"
         />
         <link
                 rel="stylesheet"
-                href="style/header.css"
+                href="{{ url_for('static', filename='style/header.css') }}"
         />
         <link
                 rel="stylesheet"
-                href="style/forms.css"
+                href="{{ url_for('static', filename='style/forms.css') }}"
         />
         <link
                 rel="stylesheet"
-                href="style/userpage.css"
+                href="{{ url_for('static', filename='style/userpage.css') }}"
         />
     </head>
     <body>
         <nav class="navbar header">
             <div class="container">
                 <a href="/" class="logo">
-                    <img src="img/logo.png" width="40">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" width="40">
                 </a>
                 {% if user == None %}
                 <div>

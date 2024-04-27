@@ -27,8 +27,10 @@ def authenticate_user():
     user = service.get_user_by_email(email)
     try:
         if hash_password(password) == user.password:
-            response = make_response(render_template("user.html"))
-            response.set_cookie("user_id", user.id)
+            response = make_response(
+                redirect(f"/user/{user.id}")
+            )
+            response.set_cookie("user_id", value=str(user.id))
             return response
         else:
             return redirect("/auth")
@@ -51,7 +53,7 @@ def register_user():
         user = service.get_user_by_email(email)
     except BaseException:
         password = hash_password(password)
-        user = User(id=0, email=email, username=data["username"], password=password,
+        user = User(email=email, username=data["username"], password=password,
                     age=int(data["age"]), status="user", sheets=[])
         service.add_user(user)
         return redirect("/")
