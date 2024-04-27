@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Master-Game: auth</title>
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/global.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/header.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/forms.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/userpage.css') }}"
+        />
+    </head>
+    <body>
+        <nav class="navbar header">
+            <div class="container">
+                <a href="/" class="logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" width="40">
+                </a>
+                {% if user == None %}
+                <div>
+                    <a class="login btn btn-outline-warning" href="/registration">
+                        <h5 class="login-text">
+                            log in
+                        </h5>
+                    </a>
+                    <a class="singin btn btn-outline-warning" href="/auth">
+                        <h5 class="singin-text">
+                            sing in
+                        </h5>
+                    </a>
+                </div>
+                {% else %}
+                <div>
+                    <a class="avatar" href="">
+                        <img class="avatar" src="{{ url_for('static', filename='img/user.jpg') }}" width="40">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="container block center">
+			<form id="main-form" action="/submit" method="POST">
+				<div class="edit">
+					<input type="text" placeholder="nickname" name="name" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="class & lvl" name="classAndLevel" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="предыстория" name="history" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="имя игрока" name="playerName" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="species" name="species" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="speed" name="speed" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="worldviews" name="worldviews" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="experience" name="experience" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="strenght" name="strenght" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="dexterity" name="dexterity" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="body type" name="body type" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="intelligence" name="intelligence" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="charisma" name="charisma" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="armorClass" name="armorClass" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="masterBonus" name="masterBonus" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="totalHits" name="totalHits" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="diceHits" name="diceHits" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="weaponName" name="weaponName" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="distance" name="distance" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="attackBonus" name="attackBonus" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="damage" name="damage" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="typeOfDamage" name="typeOfDamage" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="weight" name="weight" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="armor" name="armor" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="classOfArmor" name="classOfArmor" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="armorWeight" name="armorWeight" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="sheild" name="sheild" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="additionalItems" name="additionalItems" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="additionalItems" name="additionalItems" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="equipment" name="equipment" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="traitsAndSkills" name="traitsAndSkills" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="casterClass" name="casterClass" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="casterCharacteristic" name="casterCharacteristic" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="spellSavingThrow" name="spellSavingThrow" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="spellAttackBonus" name="spellattackBonus" class="form-field">
+				</div>
+				<div class="edit">
+					<input type="text" placeholder="minorMagic" name="minorMagic" class="form-field">
+				</div>
+				<input type="submit" value="Send">
+			</form>
+    	</div>
+	</body>
+</html>

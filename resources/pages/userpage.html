@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Master-Game: auth</title>
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/global.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/header.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/forms.css') }}"
+        />
+        <link
+                rel="stylesheet"
+                href="{{ url_for('static', filename='style/userpage.css') }}"
+        />
+    </head>
+    <body>
+        <nav class="navbar header">
+            <div class="container">
+                <a href="/" class="logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" width="40"><img>
+                </a>
+                {% if user == None %}
+                <div>
+                    <a class="login btn btn-outline-warning" href="/registration">
+                        <h5 class="login-text">
+                            log in
+                        </h5>
+                    </a>
+                    <a class="singin btn btn-outline-warning" href="/auth">
+                        <h5 class="singin-text">
+                            sing in
+                        </h5>
+                    </a>
+                </div>
+                {% else %}
+                <div>
+                    <a class="avatar" href={{"/user/" + user}}>
+                        <img class="avatar" src="{{ url_for('static', filename='img/user.jpg') }}" width="40"><img>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="container block center">
+            <div class="section-container">
+                <div class="left-side">
+		<form id="dataForm" action="/submit" method="POST">
+    		    <div class="choose-image">
+        		<img src="img/user.jpg" alt="User Icon" class="icon" width = "100" id="iconImage" onclick="changeImage()" style="pointer-events: none;">
+    		    </div>
+    		    <div class="choose-image">
+			<input type="file" class="form-field" name="file" disabled>
+    		    </div>
+		</form>
+                </div>
+                <div class="right-side">
+                    <div class="form-container">
+                        <form id="dataForm" action="/submit" method="POST">
+                            <div class="login-page-usernameedit">
+                                <input type="text" placeholder="nickname" name="name" class="form-field" disabled>
+                            </div>
+                            <div class="login-page-emailedit">
+                                <input type="text" placeholder="email" name="email" class="form-field" disabled>
+                            </div>
+                            <div class="login-page-ageedit">
+                                <input type="text" placeholder="age" name="age" class="form-field" disabled>
+                            </div>
+                            <input type="checkbox" id="toggleSwitch"> edit
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="joinButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Join</button>
+                <button id="createButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Create</button>
+                <button id="additionalButton" class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">Additional Functions</button>
+            </div>
+            <div class="carousel">
+                <button class="button">Character</button>
+                <button class="button">Character1</button>
+                <button class="button">Character2</button>
+                <button class="button">Character3</button>
+                <button class="button" onclick="window.location.href='https://www.meme-arsenal.com/memes/213bb7cd9831e40f6b5e503b225faae7.jpg'">+</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        const fields = document.querySelectorAll('.form-field');
+
+        toggleSwitch.addEventListener('change', function() {
+            fields.forEach(field => {
+                field.disabled = !toggleSwitch.checked;
+            });
+            if (!toggleSwitch.checked) {
+                const formData = new FormData(document.getElementById('dataForm'));
+                fetch('/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                })
+                .catch(error => {
+                });
+            }else{
+		var image = document.getElementById('iconImage');
+                image.uploadImage();
+            }
+        });
+    </script>
+    <script>
+        function uploadImage() {
+            const imageInput = document.getElementById('iconImage');
+            const file = imageInput.files[0];
+            const userId = '123154212';
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('userId', userId);
+
+            fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        }
+    </script>
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const buttons = document.querySelectorAll('.button');
+
+        let scrollAmount = 0;
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const index = Array.from(buttons).indexOf(button);
+                const offset = index * (button.offsetWidth + 10);
+                carousel.scrollTo({
+                    left: offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+     </script>
+</html>

@@ -1,0 +1,10 @@
+body {
+    background-image: url("/pages/img/background.png");
+    background-size: 100%;
+}
+
+.block {
+    background-image: url("/pages/img/separator.png");
+    width: 80%;
+    height: 100%;
+}
