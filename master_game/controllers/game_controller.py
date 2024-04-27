@@ -43,7 +43,7 @@ def join(data):
     room["users"][data["user_id"]] = {"status": "player"}
     join_room(room_id)
     msg = room_service.get_room(room_id)["characters"]
-    emit("join", msg)
+    emit("join", msg, broadcast=True, room=room_id)
     ic(room_id, data["user_id"])
 
 
@@ -59,7 +59,7 @@ def add_character(data):
         character = room["characters"][character_id]
         character["coordinates"] = coord
         room["characters"][character_id] = character
-        emit("add_character", data)
+        emit("add_character", data, broadcast=True, room=room_id)
     msg = character
     ic(room_id, msg)
 
@@ -72,7 +72,7 @@ def push(data):
     room = room_service.get_room(room_id)
     character = room["characters"][character]
     character["coordinates"] = coord
-    emit("push_character", data)
+    emit("push_character", data, broadcast=True, room=room_id)
     msg = character
     ic(room_id, msg)
 
@@ -103,7 +103,7 @@ def leave(data):
         room_service.close_room(room_id)
         leave = f"Room {room_id} closed"
         ic(leave)
-    send(data)
+    send(data, broadcast=True, room=room_id)
     leave = f"User {user_id} leave from room {room_id}"
     ic(leave)
 

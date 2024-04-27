@@ -1,5 +1,3 @@
-from setuptools._entry_points import render
-
 from master_game.config import Logger
 from master_game.services.user_service import UserService
 from flask import render_template, request, redirect, jsonify, Blueprint, make_response

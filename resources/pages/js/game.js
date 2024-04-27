@@ -2,6 +2,7 @@ var divCell = '<div id=c$coord class="cell"></div>';
 var divChip = '<div id=f$coord class="chip">$name</div>';
 var socket = io();
 var map = new Array(144);
+var room_id = 0;
 
 $(function () {
   start();
@@ -11,7 +12,10 @@ $(function () {
 function start() {
     createField();
     var cookie = document.cookie.split("=");
-    socket.emit("join", {"room_id": 1, "user_id": cookie[0]});
+    var url = document.URL.split("/");
+    room_id = url[url.length - 1];
+    console.log(room_id);
+    socket.emit("join", {"room_id": room_id, "user_id": cookie[0]});
 }
 
 function createField() {
@@ -55,7 +59,8 @@ socket.on("add_character", (socket) => {
 socket.on("push_character", (socket) => {
     console.log(socket)
     newCoord = socket["coordinates"];
-    oldCoord = socket["old-coords"];
+    oldCoord = socket["old_coords"];
+    console.log(newCoord, oldCoord);
     moveChipNoEmit(oldCoord, newCoord, socket["name"]);
 });
 
@@ -105,4 +110,9 @@ function showChip(coord, name) {
 
 function deleteChip(coord) {
   $("#c" + coord).html("");
+  console.log("delete");
+}
+
+function addCharacter(name) {
+    emit("add_character", {room:})
 }
