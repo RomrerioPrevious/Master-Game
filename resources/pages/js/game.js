@@ -114,5 +114,5 @@ function deleteChip(coord) {
 }
 
 function addCharacter(name) {
-    emit("add_character", {room:})
+    emit("add_character", {room: room_id})
 }

@@ -48,13 +48,15 @@ def register_user():
     email = data["email"]
     password = data["password"]
     try:
-        user = service.get_user_by_email(email)
-    except BaseException:
+        service.get_user_by_email(email)
+    except Exception:
         password = hash_password(password)
         user = User(email=email, username=data["username"], password=password,
                     age=int(data["age"]), status="user", sheets=[])
         service.add_user(user)
         return redirect("/")
+    except BaseException as ex:
+        Logger.write_error(ex)
     return redirect("/registration")
 
 

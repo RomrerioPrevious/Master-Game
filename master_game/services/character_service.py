@@ -80,11 +80,26 @@ class CharacterService:
         self._update_weapons(new_character, character)
         self._update_armor(new_character, character)
         self._update_stats(new_character, character)
-        character = new_character
+        self._update_character_fields(character, new_character)
         if self.commit:
             self._session.commit()
         update = character.to_dict()
         ic(update)
+
+    def _update_character_fields(self, character, new_character):
+        character.name = new_character.name
+        character.classes = new_character.classes
+        character.rase = new_character.rase
+        character.maxHits = new_character.maxHits
+        character.hits = new_character.hits
+        character.armorClass = new_character.armorClass
+        character.equipment = new_character.equipment
+        character.skills = new_character.skills
+        character.featuresAndTraits = new_character.featuresAndTraits
+        character.skillBonus = new_character.skillBonus
+        character.inspiration = new_character.inspiration
+        character.speed = new_character.speed
+        character.magic = new_character.magic
 
     def _update_stats(self, new_character, character):
         character.stats = new_character.stats.id
@@ -96,10 +111,10 @@ class CharacterService:
         stats.constitution = new_character.stats.constitution
         stats.intelligence = new_character.stats.intelligence
 
-def _update_armor(self, new_character, character):
+    def _update_armor(self, new_character, character):
         armor = new_character.armor
-        armor_id = self.get_weapon_id(armor)
-        if armor_id != character.armor.id:
+        armor_id = self.get_armor_id(armor)
+        if armor_id != character.armor:
             old_armor = self._session.query(Armor).filter(Armor.id == int(new_character.armor_id)).first()
             if not old_armor:
                 armor.id = armor_id
@@ -132,8 +147,10 @@ def _update_armor(self, new_character, character):
         self._cash_service.delete(id)
         character = self.get_character(id=id)
         for weapon_id in character.weapons:
-            weapon = self._session.query(Weapon).filter_by(Weapon.id == weapon_id).first()
-            if weapon.counter - 1 == 0:
+            weapon = self._session.query(Weapon).filter(Weapon.id == int(weapon_id)).first()
+            if not weapon:
+                ic(weapon)
+            elif weapon.counter - 1 == 0:
                 self._session.delete(weapon)
             else:
                 weapon.counter -= 1
