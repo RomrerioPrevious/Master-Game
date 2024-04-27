@@ -1,10 +1,10 @@
 body {
-    background-image: url("/resources/pages/img/background.png");
+    background-image: url("/pages/img/background.png");
     background-size: 100%;
 }
 
 .block {
-    background-image: url("/resources/pages/img/separator.png");
+    background-image: url("/pages/img/separator.png");
     width: 80%;
     height: 100%;
 }

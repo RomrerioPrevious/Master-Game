@@ -108,7 +108,7 @@ def leave(data):
 
 def verify_character(user_id: int, character_id: int, room: Room) -> bool:
     if user_id in room["users"].keys():
-        sheets = user_service.get_user(user_id).sheets
+        sheets = user_service.get_user_by_id(user_id).sheets
         if character_id in list(map(lambda sheet: sheet.id, sheets)):
             return True
     return False

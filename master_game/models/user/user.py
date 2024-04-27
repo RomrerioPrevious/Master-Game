@@ -1,3 +1,5 @@
+from typing import Any
+
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, PickleType
 from sqlalchemy.ext.mutable import MutableList
 from master_game.services import DatabaseService
@@ -17,6 +19,18 @@ class User(DatabaseService.base):
                     ForeignKey("characters.id"),
                     nullable=True,
                     default=[])
+
+    @staticmethod
+    def dict_to_user(self, dict_user: dict) -> Any:
+        return User(
+            id=dict_user["id"],
+            username=dict_user["username"],
+            email=dict_user["email"],
+            age=dict_user["age"],
+            password=dict_user["password"],
+            status=dict_user["status"],
+            sheets=dict_user["sheets"]
+        )
 
     def to_dict(self) -> dict:
         return {

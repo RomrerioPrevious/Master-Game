@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Master-Game: reg</title>
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-    />
-    <link
-            rel="stylesheet"
-            href="style/global.css"
-    />
-    <link
-            rel="stylesheet"
-            href="style/header.css"
-    />
-</head>
-<body>
-<h1>Registration Form</h1>
-<form>
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username"><br><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br><br>
-    <label for="age">Age:</label><br>
-    <input type="number" id="age" name="age"><br><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Send">
-</form>
-</body>
+    <head>
+        <title>Master-Game: reg</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"/>
+        <link
+          rel="stylesheet"
+          href="{{ url_for('static', filename='style/global.css') }}" />
+        <link 
+          rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='style/header.css') }}" />
+        <link
+          rel="stylesheet"
+          href="{{ url_for('static', filename='style/forms.css') }}"
+        />
+    </head>
+    <body>
+        <nav class="navbar header">
+            <div class="container">
+                <a href="/" class="logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" width="40"><img>
+                </a>
+                {% if user == None %}
+                <div>
+                    <a class="login btn btn-outline-warning" href="/registration">
+                        <h5 class="login-text">
+                            log in
+                        </h5>
+                    </a>
+                    <a class="singin btn btn-outline-warning" href="/auth">
+                        <h5 class="singin-text">
+                            sing in
+                        </h5>
+                    </a>
+                </div>
+                {% else %}
+                <div>
+                    <a class="avatar" href=>
+                        <img class="avatar" src="{{ url_for('static', filename='img/user.jpg') }}" width="40"><img>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="container block center">
+            <form class="main-form">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username"><br><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br><br>
+                    <label for="age">Age:</label><br>
+                    <input type="number" id="age" name="age"><br><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password"><br><br>
+                    <input type="submit" value="Send">
+            </form>
+        </div>
+    </body>
 </html>
